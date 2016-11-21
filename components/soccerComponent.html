@@ -1,0 +1,126 @@
+
+<section>
+
+
+
+
+   <div>
+     <select id = "select" ng-change="$ctrl._getInfo($ctrl.selected)" ng-model="$ctrl.selected">
+       <option ng-repeat="season in $ctrl.seasons" value = "{{season.id}}"> {{season.caption}}</option>
+     </select>
+   </div>
+
+  <div ng-show="$ctrl.league == 0">
+    <p class="typo-styles__demo mdl-typography--display-1">
+      Select a league ...
+    </p>
+  </div>
+
+
+  <div ng-hide="$ctrl.league == 0">
+
+      <div layout="row">
+        <div layout="column">
+
+          <p class="typo-styles__demo mdl-typography--display-1">Season</p>
+
+          <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" >
+            <thead>
+              <tr>
+                <th>Caption</th>
+                <th>Current Matchday</th>
+                <th>League</th>
+                <th>Games</th>
+                <th>Matchdays</th>
+                <th>Teams</th>
+                <th>Year</th>
+              </tr>
+
+              <tbody>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric"> {{$ctrl.seasons[$ctrl.selectedSeason].caption}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].currentMatchday}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].league}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].numberOfGames}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].numberOfMatchdays}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].numberOfTeams}}</td>
+                  <td> {{$ctrl.seasons[$ctrl.selectedSeason].year}}</td>
+                </tbody>
+              </thead>
+            </table>
+          </div>
+
+          <div layout = "column">
+
+            <p class="typo-styles__demo mdl-typography--display-1">Selected Team</p>
+
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" >
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Short Name</th>
+                  <th>Market Value</th>
+                </tr>
+
+                <tbody>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric"> <img src="{{$ctrl.team.crest}}" alt="Team Crest" width="200%" height="200%"/></td>
+                    <td> {{$ctrl.team.code}}</td>
+                    <td> {{$ctrl.team.name}}</td>
+                    <td> {{$ctrl.team.shortName}}</td>
+                    <td> {{$ctrl.team.marketValue}}</td>
+                  </tbody>
+                </thead>
+              </table>
+          </div>
+      </div>
+
+    <p class="typo-styles__demo mdl-typography--display-1">League</p>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" >
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric"></th>
+          <th>Position</th>
+          <th>Team Name</th>
+          <th>Wins</th>
+          <th>points</th>
+          <th>Played Games</th>
+          <th>Losses</th>
+          <th>Goals Against</th>
+          <th>Goals</th>
+          <th>Goal Difference</th>
+          <th>Draws</th>
+          <th>Away (G, GA, W, D, L)</th>
+          <th>Home (G, GA, W, D, L)</th>
+        </tr>
+
+        <tbody>
+          <tr ng-repeat="team in $ctrl.league.standing" ng-click="$ctrl._getTeamInfo($ctrl.league.standing[$index]._links.team.href)" ng-style="$ctrl.league.standing[$index].position === 1 && {'background-color' : 'green'} || $ctrl.league.standing[$index].isRelegationCandidate === true && {'background-color' : 'yellow'}">
+            <td><img src="{{team.crestURI}}" alt="Team Crest" width="200%" height="200%"/></td>
+            <td class="mdl-data-table__cell--non-numeric" > {{team.position}}</td>
+            <td> {{team.teamName}}</td>
+            <td> {{team.wins}}</td>
+            <td> {{team.points}}</td>
+            <td> {{team.playedGames}}</td>
+            <td> {{team.losses}}</td>
+            <td> {{team.goalsAgainst}}</td>
+            <td> {{team.goals}}</td>
+            <td> {{team.goalDifference}}</td>
+            <td> {{team.draws}}
+            <td> {{team.away.goals}}, {{team.away.goalsAgainst}}, {{team.away.wins}}, {{team.away.draws}}, {{team.away.losses}}</td>
+            <td> {{team.home.goals}}, {{team.home.goalsAgainst}}, {{team.home.wins}}, {{team.home.draws}}, {{team.home.losses}}</td>
+            </tr>
+
+          </tbody>
+        </thead>
+      </table>
+
+
+
+
+  </div>
+
+</section>
