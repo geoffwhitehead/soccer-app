@@ -98,9 +98,13 @@
         </tr>
 
         <tbody>
-          <tr ng-repeat="team in $ctrl.league.standing" ng-click="$ctrl._getTeamInfo($ctrl.league.standing[$index]._links.team.href)" ng-style="$ctrl.league.standing[$index].position === 1 && {'background-color' : 'green'} || $ctrl.league.standing[$index].isRelegationCandidate === true && {'background-color' : 'yellow'}">
+          <tr ng-repeat="team in $ctrl.league.standing" ng-click="$ctrl._getTeamInfo($ctrl.league.standing[$index]._links.team.href)" ng-style=
+          "$ctrl.league.standing[$index].isChampion === true && {'background-color' : 'pink'}
+          || $ctrl.league.standing[$index].isRelegated === true && {'background-color' : 'red'}
+          || $ctrl.league.standing[$index].position === 1 && {'background-color' : 'green'}
+          || $ctrl.league.standing[$index].isRelegationCandidate === true && {'background-color' : 'yellow'}">
             <td><img src="{{team.crestURI}}" alt="Team Crest" width="200%" height="200%"/></td>
-            <td class="mdl-data-table__cell--non-numeric" > {{team.position}}</td>
+            <td class="mdl-data-table__cell--non-numeric" ng-style="$ctrl.leag"> {{team.position}}</td>
             <td> {{team.teamName}}</td>
             <td> {{team.wins}}</td>
             <td> {{team.points}}</td>
